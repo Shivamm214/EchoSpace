@@ -1,0 +1,127 @@
+.rounded-lg {
+    border-radius: 1rem;
+}
+.usermCard{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 4px;
+}
+
+#user-list{
+    height: calc(100svh - 28svh); 
+    overflow: auto;
+}
+#friendsDrawar{
+    height: calc(100svh - 11svh); 
+}
+
+.connectContainer {
+    height: calc(100svh - 43svh);
+}
+@media (max-width: 768px) {
+    .connectContainer {
+        height: calc(100svh - 57svh);
+    }
+}
+
+.bg-in-green-600 {
+    background-color: #16a34a; 
+}
+
+.bg-in-red-600 {
+    background-color: #dc2626;
+}
+
+.userIconOutlineNormal {
+    border-width: 4px;
+    border-color: #1465fa; 
+    border-radius: 9999px;
+}
+
+.userIconOutline {
+    width: 100px;
+    height: 100px;
+    border-width: 4px;
+    border-style: solid;
+    border-color: #1465fa; /* Initial color */
+    border-radius: 9999px; /* Fully rounded */
+    position: relative;
+    animation: colorChange 3s infinite;
+}
+
+.userIconOutline::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    border: 3px solid #1465fa;
+    border-radius: 9999px;
+    opacity: 0;
+}
+
+@keyframes colorChange {
+    0% {
+        border-color: #1465fa;
+    }
+    25% {
+        border-color: #14fa65;
+    }
+    50% {
+        border-color: #ff3e3e;
+    }
+    75% {
+        border-color: #fce51d;
+    }
+    100% {
+        border-color: #fa4214;
+    }
+}
+
+@keyframes wave {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+.green-border {
+    border-style: solid !important;
+    border-width: 2px !important;
+    border-color: rgb(5, 206, 5) !important; 
+
+}
+
+.red-border {
+    border-style: solid !important;
+    border-width: 2px !important;
+    border-color: rgb(255, 0, 0) !important;
+}
+/* #lobby {
+    height: calc(var(--navbar-height) - 100vh);
+  } */
+
+#leftArea{
+    display: inline;
+}
+#subNavbar{
+    justify-content: end;
+}
+#leftAreaBtn{
+    display: none;
+}
+@media only screen and (max-width: 950px) {
+    #leftArea{
+        display: none;
+        position: absolute;
+    }
+    #leftAreaBtn{
+        display: inline-block;
+    }
+    #subNavbar{
+        justify-content: space-between;
+    }
+}

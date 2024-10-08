@@ -1,0 +1,39 @@
+{% extends "index.html" %}
+{% load static %}
+{% block roomLobby %}
+<div id="data-container" 
+  data-user-name="{{ user.username|escapejs }}"
+  {% if user.profile_image %}
+  data-user-profile-image="{{user.profile_image.url}}"
+  {% else %}
+  data-user-profile-image="{% static 'images/dp.png' %}"
+  {% endif %}
+  data-user-status="{{status}}">
+</div>
+<div class="flex flex-col w-full h-full">
+    <div class="text-white font-semibold sticky text-xl">
+      <p id="roomName">#{{roomName}}</p>
+    </div>
+    <div class="text-white mt-2 rounded-xl w-full flex-grow flex flex-col h-full" id="chatSection">
+      <div class="rounded-xl px-2 flex flex-col flex-grow w-full h-full">
+        <div class="flex-grow p-2 overflow-auto hide-scrollbar" id="chatAppendArea">
+        </div>
+        <div class="flex-none mt-auto" id="msgInput">
+          <form class="flex items-center mb-10">
+            <a href="/leave/{{roomName}}/{{status}}/" class="bg-red-500 text-white rounded-full mr-2 px-4 py-1.5 hover:bg-red-700 inline-block text-center">
+              Leave
+            </a>
+            <input id="msgTextInput" class="w-full bg-transparent text-white rounded-full outline-none py-1.5" type="text" placeholder="Type your message..." />
+            <input type="submit" id="sendTextMsg" class="bg-gray-500 text-white rounded-full ml-2 px-4 py-1.5 hover:bg-gray-700" value="Send">
+          </form>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <audio id="our_audio" class="hidden"></audio>
+  <audio id="remote_audio" class="hidden"></audio>
+  <script>
+    const guestProfileImageUrl = "{% static 'images/dp.png' %}";
+  </script>
+{% endblock roomLobby %}

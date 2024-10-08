@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% block title %}
+  echoSpace
+{% endblock %}
+{% block content %}
+  {% load static %}
+
+  <div class="flex">
+    <div id="leftArea" class="flex z-46 h-screen">
+      <div class="relative w-full max-w-sm md:max-w-md inset-0 bg-black z-50 flex flex-col h-full">
+        <div class="w-full text-white flex justify-between px-6 items-center py-3">
+          <i class="fa-solid fa-arrow-left bg-slate-900 p-2 rounded-full cursor-pointer" id="closeDrawar"></i>
+        </div>
+        <div class="px-5 overflow-auto hidden" id="searchFeild">
+          <form class="w-full mx-auto">
+            <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
+            <div class="relative">
+              <input type="search" id="default-search" class="block w-full p-2.5 ps-4 text-sm text-gray-900 rounded-full bg-[#0a0a0a]" placeholder="Search" required />
+              <button type="submit" class="text-white absolute end-0.5 hover:bg-white hover:text-gray-900 bottom-0.5 outline-2 bg-gray-600 font-medium rounded-3xl text-sm px-4 py-2">Search</button>
+            </div>
+            <div class="rounded-2xl overflow-auto" id="">
+              <div class="my-4">
+                <div class="w-full px-3 py-2 rounded-2xl userCard flex justify-between items-center hover:bg-[#181717] bg-[#0a0a0a] transition duration-200 ease-in-out">
+                  <div class="w-12 h-12">
+                    <img class="rounded-full object-cover" src="{% static 'images/dp.png' %}" alt="Profile Picture" />
+                  </div>
+                  <div class="flex flex-col ml-3 px-5 w-40">
+                    <span class="block font-medium text-gray-100">Aslam Miya</span>
+                    <span class="block text-gray-500">@aslammiya</span>
+                  </div>
+                  <div class="w-2 h-2 bg-red-600 rounded-full mr-4"></div>
+                  <button type="button" class="hover:bg-white text-white hover:text-black border border-gray-300 hover:border-white px-3 py-1 rounded-full flex items-center justify-center hover:text-black transition duration-200 ease-in-out"><i class="fas fa-user-plus"></i></button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="flex justify-evenly mb-2" id="tabs">
+          <button id="roomsTab" class="text-white hover:text-gray-300 focus:outline-none font-bold">Rooms</button>
+          <button id="exploreTab" class="text-white hover:text-gray-300 focus:outline-none border-b font-bold">Users</button>
+        </div>
+        <div class="px-5 flex-1 overflow-auto" id="tabContent">
+          
+          <div class="rounded-2xl overflow-auto scroll-m-0 hidden" id="rooms">
+            {% for room_name in room_names %}
+              <div class="my-4 w-full px-2">
+                <div class="px-3 py-2 rounded-2xl userCard flex justify-between items-center hover:bg-[#181717] bg-[#0a0a0a] transition duration-200 ease-in-out">
+                  <div class="flex flex-col w-40 ml-1 px-5">
+                    <span class="font-medium text-white">{{room_name}}</span>
+                  </div>
+                  <a href="/room/{{room_name}}/join/"><button type="button" class="hover:bg-white px-3 py-1 rounded-full flex items-center justify-center text-white hover:text-black border border-gray-300 hover:border-white transition duration-200 ease-in-out">Join</button></a>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+          <div class="rounded-2xl overflow-auto" id="explore">
+            {% for user in usersInfo %}
+              <div class="my-4">
+                <div class="w-full px-3 py-2 rounded-2xl userCard flex justify-between items-center hover:bg-[#181717] bg-[#0a0a0a] transition duration-200 ease-in-out">
+                  <div class="w-12 h-12 block relative rounded-full overflow-hidden">
+                    {% if user.profile_image %}
+                      <img class="rounded-full object-cover w-full h-full" src="{{ user.profile_image.url }}" alt="Profile Picture" />
+                    {% else %}
+                      <img class="rounded-full object-cover w-full h-full" src="{% static 'images/dp.png' %}" alt="Profile Picture" />
+                    {% endif %}
+                  </div>
+                  
+                  <div class="flex flex-col ml-3 px-5 w-40">
+                    <span class="block font-medium text-gray-100">{{user.first_name}} {{user.last_name}}</span>
+                    <span class="block text-gray-500">@{{user.username}}</span>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col h-screen w-screen">
+      <div class="flex-none px-2" id="navbar">
+        <div class="flex bg-black justify-end" id="subNavbar">
+          <div class="text-white items-center my-auto" id="leftAreaBtn">
+            <i class="fa-solid fa-arrow-right bg-slate-900 p-2.5 rounded-full"></i>
+          </div>
+          <div class="block relative rounded-full usermCard py-0.5" id="menu-button">
+            {% if user.profile_image %}
+              <img class="w-10 h-10 rounded-full object-cover" src="{{ user.profile_image.url }}" width="80%" alt="Profile Image" />
+            {% else %}
+              <img class="w-10 h-10 rounded-full object-cover" src="{% static 'images/dp.png' %}" width="80%" alt="Default Profile Image" />
+            {% endif %}
+          </div>
+          <div class="absolute right-0 w-fit bg-[#181717] rounded-tl-lg rounded-bl-lg rounded-br-lg mx-12 shadow-2xl z-50 hidden mt-12" id="menu-items">
+            <a id="showProfile" class="block px-4 py-2 text-white hover:bg-[#0a0a0a] rounded-tl-lg hover:cursor-pointer">Profile</a>
+            <a href="/logout" class="block px-4 py-2 text-white hover:bg-[#0a0a0a]">Logout</a>
+            <hr class="m-0 p-0" />
+            <div class="flex justify-evenly">
+              <div class="">
+                <a href="https://www.linkedin.com/in/aslammiya/"><i class="fa-brands fa-linkedin text-blue-700 hover:text-blue-900 text-xl"></i></a>
+              </div>
+              <div class="">
+                <a href="https://github.com/aslammiya"><i class="fa-brands fa-github text-gray-700 hover:text-gray-900 text-xl"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex flex-col bg-[#0a0a0a] px-4 py-3 w-full md:rounded-l-3xl md:rounded-r-2xl h-full" id="lobby">
+        {% block homeLobby %}{% endblock homeLobby %}
+        
+        {% block roomLobby %}{% endblock roomLobby %}
+        
+      </div>
+    </div>
+  </div>
+
+  <div id="changeGuestPaswd" class="fixed top-5 left-0 right-0 flex items-center justify-center z-50 hover:cursor-pointer" onclick="showPassChangeDialog()">
+    {% if user.isGuest == True %}
+      <div class="changePassPopup absolute mx-auto flex items-center justify-center bg-red-500 bg-opacity-75 text-white p-1 rounded-xl px-2">
+        <span class="text-sm font-semibold">Change your password!</span>
+      </div>
+    {% endif %}
+    {% if messages %}
+      {% for message in messages %}
+        <div class="changePassPopup absolute mx-auto flex items-center justify-center bg-red-500 bg-opacity-75 text-white p-1 rounded-xl px-2">
+          <span class="text-sm font-semibold">Invalid old password</span>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <div id="profileInfo" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
+    <div class="bg-[#181717] px-8 py-4 rounded-2xl shadow-xl pt-10">
+      <button id="closeProfile" class="relative -mt-8 -mr-6 bg-red-500 rounded-full w-8 h-8 flex mx-auto items-center justify-center text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"><i class="fas fa-times"></i></button>
+      <form id="profileForm" method="post" action="{% url 'saveProfileInfo' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="flex justify-center pb-4">
+          <div class="relative">
+            <div class="rounded-full overflow-hidden">
+              {% if user.profile_image %}
+                <img class="w-24 h-28 sm:w-28 sm:h-32 object-cover" src="/media/{{ user.profile_image }}" alt="Profile Image" />
+              {% else %}
+                <img class="w-24 h-28 sm:w-28 sm:h-32 object-cover" src="{% static 'images/dp.png' %}" alt="Profile Image" />
+              {% endif %}
+            </div>
+            <div class="relative">
+              <i type="button" class="fas fa-edit absolute bottom-0 right-0 bg-gray-600 opacity-55 text-white text-xs rounded-full px-3 py-1 hover:bg-gray-950" id="dpEditIcon" onclick="changeProfileImage()"></i>
+              <input type="file" id="changeProfileImageFile" id="dp" name="dp" hidden onchange="showUploadedMessage(this)" accept="image/*"/>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 pb-10">
+          <div class="flex items-center mb-2 w-72">
+            <label for="text" id="name_label" class="w-full font-semibold rounded-l-lg text-lg py-2 px-4 text-white">{{ user.first_name }} {{ user.last_name }}</label>
+            <div class="flex items-center mb-2 hidden" id="name_feild">
+              <div class="flex-1">
+                <input type="text" id="first_name" name="first_name" class="w-full rounded-l-lg text-lg font-medium py-2 px-4 bg-transparent border-b border-gray-300 outline-none text-white" placeholder="First Name" value="{{ user.first_name }}" />
+              </div>
+              <div class="flex-1">
+                <input type="text" id="last_name" name="last_name" class="w-full text-lg font-medium rounded-r-lg py-2 px-4 bg-transparent border-b border-gray-300 outline-none text-white" placeholder="Last Name" value="{{ user.last_name }}" />
+              </div>
+            </div>
+            <i class="fas fa-edit ml-2 text-gray-500 cursor-pointer" id="edit_name" onclick="enableNameFields()"></i>
+          </div>
+          <div class="flex items-center mb-2 w-72">
+            <label for="username_label" id="username_label" class="flex-1 rounded-lg text-lg px-4 text-white">@{{ user.username }}</label>
+            <input type="text" id="username" name="username" class="flex-1 text-white hidden rounded-lg text-lg px-4 bg-transparent border-b border-gray-300 outline-none" placeholder="Username" value="{{ user.username }}" />
+            <i class="fas fa-edit ml-2 text-gray-500 cursor-pointer" id="edit_username" onclick="enableFieldUsername()"></i>
+          </div>
+          <button type="button" class="mt-2 font-semibold bg-yellow-600 w-full hover:bg-yellow-700 rounded-xl text-white py-1 px-4 focus:outline-none focus:ring-2 focus:ring-orange-300" id="change-password-button">Change password</button>
+          <button type="submit" class="mt-4 bg-blue-500 w-full hover:bg-blue-600 rounded-xl text-white py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-300 hidden" id="save-button">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="changePasswordDiv" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
+    <div class="bg-[#181717] px-8 py-4 rounded-2xl shadow-xl pt-10">
+      <button id="closeChangePassword" class="relative -mt-8 -mr-6 bg-red-500 rounded-full w-8 h-8 flex mx-auto items-center justify-center text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"><i class="fas fa-times"></i></button>
+      <form id="changePassword" method="post" action="{% url 'changePassword' %}" class="px-3 py-1">
+        {% csrf_token %}
+        {% if user.isGuest == False %}
+          <input type="text" id="old_password" name="old_password" class="mb-4 rounded-lg text-lg px-4 bg-transparent border-b border-gray-300 outline-none block text-white" placeholder="Old password" required />
+        {% endif %}
+        <input type="text" id="new_password" name="new_password" class="rounded-lg text-lg px-4 bg-transparent border-b border-gray-300 outline-none block text-white" placeholder="New password" required />
+        <button type="submit" class="mt-4 bg-blue-500 w-full hover:bg-blue-600 rounded-lg text-white py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-300" id="change-password">Save</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="invitingDialog" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
+    <div class="bg-[#181717] px-8 py-4 rounded-2xl shadow-xl">
+      <p class="text-lg font-semibold mb-3 text-white">User is inviting in room</p>
+      <div class="flex justify-end w-[100%] gap-4">
+        <button id="acceptButton" class="px-4 w-full py-1 bg-red-500 text-white rounded-lg hover:bg-red-600">Reject</button>
+        <button id="acceptButton" class="px-4 w-full py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Accept</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/rooms.js' %}"></script>
+{% endblock %}
