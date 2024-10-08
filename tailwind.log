@@ -1,0 +1,8 @@
+
+> theme@3.8.0 start
+> npm run dev
+
+
+> theme@3.8.0 dev
+> cross-env NODE_ENV=development tailwindcss --postcss -i ./src/styles.css -o ../static/css/dist/styles.css -w
+
