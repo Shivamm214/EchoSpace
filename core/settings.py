@@ -12,11 +12,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-#r#u51cbh(2gbtwh)7met481!%z-6$kvmqk#&tdx$0u^jea=a8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = ['127.0.0.1', '*']
 
-ALLOWED_HOSTS = ['.render.com', 'echospace.onrender.com']
+ALLOWED_HOSTS = ['.render.com', 'echospace.onrender.com', '127.0.0.1', '*']
 CSRF_TRUSTED_ORIGINS = ['https://echospace.onrender.com']
 
 # Application definition
@@ -142,8 +142,6 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -163,7 +161,8 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [REDIS_URL],
+            "hosts": ["redis://default:vTQ1ssfT0DUchkjRt6fqmc8LBUkoHe2c@redis-17951.c8.us-east-1-2.ec2.redns.redis-cloud.com:17951"],
         },
     },
 }
+

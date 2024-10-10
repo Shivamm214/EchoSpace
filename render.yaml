@@ -1,0 +1,17 @@
+# Exported from Render on 2024-08-17T09:51:18Z
+services:
+- type: web
+  name: echospace
+  runtime: python
+  repo: https://github.com/aslammiya/echospace
+  plan: free
+  envVars:
+  - key: SECRET_KEY
+    sync: false
+  - key: REDIS_URL
+    sync: false
+  region: oregon
+  buildCommand: pip install -r requirements.txt
+  startCommand: daphne -b 0.0.0.0 -p 8556 core.asgi:application
+  pullRequestPreviewsEnabled: false
+version: "1"

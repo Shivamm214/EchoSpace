@@ -1,0 +1,8 @@
+Watching for file changes with StatReloader
+[08/Jun/2024 17:55:24] "GET /login/?next=/ HTTP/1.1" 200 2993
+[08/Jun/2024 17:55:24] "GET /static/css/style.css HTTP/1.1" 200 2027
+[08/Jun/2024 17:55:24] "GET /static/css/dist/styles.css?v=1717869324 HTTP/1.1" 200 37704
+[08/Jun/2024 17:55:24] "GET /static/django-browser-reload/reload-listener.js HTTP/1.1" 200 623
+Not Found: /favicon.ico
+[08/Jun/2024 17:55:25] "GET /favicon.ico HTTP/1.1" 404 3410
+[08/Jun/2024 17:55:25] "GET /static/django-browser-reload/reload-worker.js HTTP/1.1" 200 2711

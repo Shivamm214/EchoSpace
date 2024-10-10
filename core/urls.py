@@ -21,7 +21,8 @@ urlpatterns = [
     path('room/<str:roomname>/<str:status>/', createRoom, name='createRoom'),
     path('leave/<str:roomname>/<str:status>/', leaveRoom, name="leaveRoom"),
     path("__reload__/", include("django_browser_reload.urls")),
-    path('', home, name="home"),
+    path('', landing_page, name="landing_page"),
+    path('<str:username>/', home, name="home"),
 ]
 
 if settings.DEBUG:

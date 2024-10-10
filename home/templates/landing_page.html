@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EchoSpace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+        }
+
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        /* Make all sections transparent */
+        header,
+        section,
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            /* Semi-transparent black */
+        }
+
+        h1,
+        h2,
+        p,
+        a,
+        button {
+            color: white;
+        }
+
+        a:hover {
+            color: lightgray;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Video Background -->
+    <video autoplay muted loop id="video-background">
+        <source src="{% static 'bg_video.mp4' %}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Header -->
+    <header class="flex justify-between items-center px-20 py-5">
+        <div class="text-xl font-bold text-white">EchoSpace</div>
+        <div class="space-x-4">
+            <a href="login/"><button
+                    class="bg-white py-1 px-2.5 rounded-3xl font-medium text-black hover:bg-black hover:text-white hover:outline hover:outline-white hover:outline-2">Sign
+                    In</button></a>
+            <a href="register/"><button
+                    class="bg-white py-1 px-2.5 rounded-3xl font-medium text-black hover:bg-black hover:text-white hover:outline hover:outline-white hover:outline-2">Sign
+                    Up</button></a>
+            <a href="guest_login/"><button
+                    class="bg-white py-1 px-2.5 rounded-3xl font-medium text-black hover:bg-black hover:text-white hover:outline hover:outline-white hover:outline-2">Guest
+                    User</button></a>
+        </div>
+    </header>
+
+    <section class="flex flex-col items-center justify-center h-screen text-center">
+        <div class="container mx-auto">
+            <h1 class="text-6xl font-bold mb-4">Welcome to EchoSpace</h1>
+            <p class="text-lg mb-6">Real-time chat, built with Django Channels and WebSocket.</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 text-center">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-white">Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- Card 1 -->
+                <div
+                    class="p-6 bg-transparent backdrop-blur-lg bg-opacity-20 rounded-lg border border-gray-700 hover:border-white transition duration-300 shadow-lg hover:shadow-3xl">
+                    <div class="text-white">
+                        <h3 class="text-2xl font-semibold mb-4">User Authentication</h3>
+                        <p class="text-gray-400">Register, log in, and manage account details securely.</p>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div
+                    class="p-6 bg-transparent backdrop-blur-lg bg-opacity-20 rounded-lg border border-gray-700 hover:border-blue-500 transition duration-300 shadow-lg hover:shadow-3xl">
+                    <div class="text-white">
+                        <h3 class="text-2xl font-semibold mb-4">Room Management</h3>
+                        <p class="text-gray-400">Create and join rooms for real-time communication.</p>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div
+                    class="p-6 bg-transparent backdrop-blur-lg bg-opacity-20 rounded-lg border border-gray-700 hover:border-white transition duration-300 shadow-lg hover:shadow-3xl">
+                    <div class="text-white">
+                        <h3 class="text-2xl font-semibold mb-4">Real-Time Chat</h3>
+                        <p class="text-gray-400">Chat with others in real-time using WebSockets.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Used Section -->
+    <section class="py-16 text-center">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-white">Technologies Used</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Card 1 -->
+                <div
+                    class="p-6 bg-transparent backdrop-blur-lg bg-opacity-20 rounded-lg border border-gray-700 hover:border-blue-500 transition duration-300 shadow-lg hover:shadow-3xl">
+                    <div class="text-white">
+                        <h3 class="text-2xl font-semibold mb-4">Django</h3>
+                        <p class="text-gray-400">Powerful backend framework to handle routing and logic.</p>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div
+                    class="p-6 bg-transparent backdrop-blur-lg bg-opacity-20 rounded-lg border border-gray-700 hover:border-white transition duration-300 shadow-lg hover:shadow-3xl">
+                    <div class="text-white">
+                        <h3 class="text-2xl font-semibold mb-4">WebSocket</h3>
+                        <p class="text-gray-400">Real-time communication using Django Channels.</p>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div
+                    class="p-6 bg-transparent backdrop-blur-lg bg-opacity-20 rounded-lg border border-gray-700 hover:border-blue-500 transition duration-300 shadow-lg hover:shadow-3xl">
+                    <div class="text-white">
+                        <h3 class="text-2xl font-semibold mb-4">Tailwind CSS</h3>
+                        <p class="text-gray-400">Modern utility-first CSS framework for clean design.</p>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div
+                    class="p-6 bg-transparent backdrop-blur-lg bg-opacity-20 rounded-lg border border-gray-700 hover:border-white transition duration-300 shadow-lg hover:shadow-3xl">
+                    <div class="text-white">
+                        <h3 class="text-2xl font-semibold mb-4">Redis</h3>
+                        <p class="text-gray-400">Efficient caching and real-time message handling.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-6 text-center">
+        <div class="container mx-auto">
+            <p class="text-gray-400">© 2024 echoSpace, Inc.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

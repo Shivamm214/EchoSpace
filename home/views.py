@@ -38,6 +38,12 @@ def sign_up(request):
         return redirect("/login")
     return render(request, 'userRegistration.html')
 
+def landing_page(request):
+    if request.user.is_authenticated:
+        print(request.user.username) 
+        return redirect(f"/{request.user.username}")
+    return render(request,'landing_page.html')
+
 def check_username(request):
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -55,7 +61,7 @@ def sign_in(request):
 
         if user is not None:
             login(request, user)
-            return redirect("/")
+            return redirect(f"/{request.user.username}")
         else:
             messages.error(request, "Invalid username or password.")
             return redirect("/login")
@@ -64,7 +70,7 @@ def sign_in(request):
 
 def sign_out(request):
     logout(request)
-    return redirect("/login")
+    return redirect("/")
 
 def genGuestCred():
     firstName = "User"
@@ -92,7 +98,7 @@ def guest_login(request):
     user = authenticate(username=guestUserName, password=password)
     if user is not None:
         login(request, user)
-        return redirect("/")
+        return redirect(f"/{request.user.username}")
     else:
         messages.error(request, "Failed to login as guest.")
         return redirect("/login")
@@ -116,11 +122,12 @@ def saveProfileInfo(request):
             user.profile_image = request.FILES.get("dp")
 
         user.save()
-    return redirect('/')
+    return redirect(f"/{request.user.username}")
 
 
 @login_required(login_url="/login/")
-def home(request):
+def home(request, username):
+    print("USER: ", username)
     usersInfo = CustomUser.objects.all()
     rooms = Chat.objects.all()
     room_names = [room.room_name for room in rooms]
@@ -144,9 +151,9 @@ def changePassword(request):
             user.save()
         else:
             messages.error(request, "Invalid old password.")
-            return redirect("/")
+            return redirect(f"/{request.user.username}")
 
-    return redirect('/')
+    return redirect(f"/{request.user.username}")
 
 def check_old_password(request):
     if request.method == 'POST':
@@ -189,10 +196,10 @@ def createRoom(request, roomname, status):
     }
     return render(request, 'roomLobby.html', context)
 
-def leaveRoom(request, roomname,status):
+def leaveRoom(request, roomname, status):
     # print(roomname, status)
     if(status == 'created'):
         rooms = get_object_or_404(Chat, room_name=roomname) 
         rooms.delete()
     
-    return redirect('/')
+    return redirect(f"/{request.user.username}")
