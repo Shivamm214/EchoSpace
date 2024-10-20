@@ -11,11 +11,11 @@ echoSpace Sign up
             {% csrf_token %}
             <div class="mb-4">
                 <label for="first-name" class="block text-gray-700 font-bold mb-2">First Name</label>
-                <input type="text" id="first-name" name="first-name" class="border rounded-xl px-3 py-2 w-full focus:outline-none focus:border-blue-400" placeholder="Enter your name" required>
+                <input type="text" pattern="[a-zA-Z]{4,}" minlength="4" title="Name should only contain letters (a-z) and must be at least 4 characters long." id="first-name" name="first-name" class="border rounded-xl px-3 py-2 w-full focus:outline-none focus:border-blue-400" placeholder="Enter your name" required>
             </div>
             <div class="mb-4">
                 <label for="last-name" class="block text-gray-700 font-bold mb-2">Last Name</label>
-                <input type="text" id="last-name" name="last-name" class="border rounded-xl px-3 py-2 w-full focus:outline-none focus:border-blue-400" placeholder="Enter your name" required>
+                <input type="text" id="last-name" pattern="[a-zA-Z]{4,}" minlength="4" title="Name should only contain letters (a-z) and must be at least 4 characters long." name="last-name" class="border rounded-xl px-3 py-2 w-full focus:outline-none focus:border-blue-400" placeholder="Enter your name" required>
             </div>
             <div class="mb-4">
                 <label for="username" class="block text-gray-700 font-bold mb-2">Username</label>

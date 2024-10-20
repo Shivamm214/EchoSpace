@@ -155,10 +155,10 @@
             <label for="text" id="name_label" class="w-full font-semibold rounded-l-lg text-lg py-2 px-4 text-white">{{ user.first_name }} {{ user.last_name }}</label>
             <div class="flex items-center mb-2 hidden" id="name_feild">
               <div class="flex-1">
-                <input type="text" id="first_name" name="first_name" class="w-full rounded-l-lg text-lg font-medium py-2 px-4 bg-transparent border-b border-gray-300 outline-none text-white" placeholder="First Name" value="{{ user.first_name }}" />
+                <input type="text" pattern="[a-zA-Z]{4,}" minlength="4" title="Name should only contain letters (a-z) and must be at least 4 characters long."  id="first_name" name="first_name" class="w-full rounded-l-lg text-lg font-medium py-2 px-4 bg-transparent border-b border-gray-300 outline-none text-white" placeholder="First Name" value="{{ user.first_name }}" />
               </div>
               <div class="flex-1">
-                <input type="text" id="last_name" name="last_name" class="w-full text-lg font-medium rounded-r-lg py-2 px-4 bg-transparent border-b border-gray-300 outline-none text-white" placeholder="Last Name" value="{{ user.last_name }}" />
+                <input type="text" pattern="[a-zA-Z]{4,}" minlength="4" id="last_name" title="Name should only contain letters (a-z) and must be at least 4 characters long."  name="last_name" class="w-full text-lg font-medium rounded-r-lg py-2 px-4 bg-transparent border-b border-gray-300 outline-none text-white" placeholder="Last Name" value="{{ user.last_name }}" />
               </div>
             </div>
             <i class="fas fa-edit ml-2 text-gray-500 cursor-pointer" id="edit_name" onclick="enableNameFields()"></i>
